@@ -1,0 +1,26 @@
+{
+  "name": "nodejs-express-ts-mongodb",
+  "version": "1.0.0",
+  "scripts": {
+    "server": "nodemon src/index.ts"
+  },
+  "dependencies": {
+    "express": "^4.17.3",
+    "mongoose": "^6.2.2",
+    "morgan": "^1.10.0",
+    "cors": "^2.8.5",
+    "dotenv": "^16.0.0"
+  },
+  "devDependencies": {
+    "@types/cors": "^2.8.12",
+    "@types/express": "^4.17.13",
+    "@types/mongoose": "^5.11.97",
+    "@types/morgan": "^1.9.3",
+    "@types/node": "^17.0.18",
+    "nodemon": "^2.0.15",
+    "typescript": "^4.4.4"
+  },
+  "keywords": [],
+  "author": "José MDP",
+  "license": "ISC"
+}
