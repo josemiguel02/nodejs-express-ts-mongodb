@@ -8,6 +8,7 @@ import {
   editCamera,
   deleteCamera
 } from './controllers/cameras.controller'
+import multer from './libs/multer'
 
 const app = express()
 
@@ -20,6 +21,8 @@ app.use(morgan('dev'))
 app.use(urlencoded({ extended: false }))
 app.use(json())
 
+app.use('/uploads', express.static('uploads'))
+
 app.get('/', (req: Request, res: Response) => {
   res.status(200).json({
     message: 'Hello World!!'
@@ -30,10 +33,10 @@ app.get('/', (req: Request, res: Response) => {
 app.get('/api/cameras', getCameras)
 
 // Create a new camera
-app.post('/api/cameras/add', createCamera)
+app.post('/api/cameras/add', multer.single('img'), createCamera)
 
 // Edit a camera
-app.put('/api/cameras/edit/:id', editCamera)
+app.put('/api/cameras/edit/:id', multer.single('img'), editCamera)
 
 // Delete a camera
 app.delete('/api/cameras/delete/:id', deleteCamera)
