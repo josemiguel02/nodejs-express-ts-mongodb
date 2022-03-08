@@ -2,7 +2,8 @@
   "name": "nodejs-express-ts-mongodb",
   "version": "1.0.0",
   "scripts": {
-    "server": "nodemon src/index.ts",
+    "dev": "nodemon src/index.ts",
+    "start": "node dist/index.js",
     "build": "tsc"
   },
   "dependencies": {
