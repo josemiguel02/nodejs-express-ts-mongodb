@@ -1,4 +1,5 @@
 import { Schema, model } from 'mongoose'
+import { Camera } from '../interfaces'
 
 const CameraSchema = new Schema({
   name: { type: String, required: true },
@@ -10,4 +11,4 @@ const CameraSchema = new Schema({
   createdAt: { type: Date, default: Date.now }
 })
 
-export default model('cameras', CameraSchema)
+export default model<Camera>('cameras', CameraSchema)

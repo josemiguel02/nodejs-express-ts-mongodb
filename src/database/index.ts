@@ -8,7 +8,7 @@ const OPTIONS: ConnectOptions = {
   pass: password
 }
 
-mongoose.connect(uri, OPTIONS)
+mongoose.connect(uri!, OPTIONS)
 const connection = mongoose.connection
 
 connection.once('open', () => {

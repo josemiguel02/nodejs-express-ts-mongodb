@@ -1,6 +1,9 @@
 import { Request, Response } from 'express'
 import { NativeError } from 'mongoose'
+import { Camera } from '../interfaces'
 import Cameras from '../models/cameras'
+import { resolve } from 'path'
+import fs from 'fs-extra'
 
 export const getCameras = async (req: Request, res: Response) => {
   try {
@@ -14,14 +17,14 @@ export const getCameras = async (req: Request, res: Response) => {
 
 export const createCamera = async (req: Request, res: Response) => {
   try {
-    const { name, brand, model, price, connection_type, image } = req.body
+    const { name, brand, model, price, connection_type } = req.body
     const newCamera = new Cameras({
       name,
       brand,
       model,
       price,
       connection_type,
-      image
+      image: req.file?.path
     })
 
     await newCamera.save()
@@ -34,7 +37,7 @@ export const createCamera = async (req: Request, res: Response) => {
 
 export const editCamera = (req: Request, res: Response) => {
   const { id } = req.params
-  const { name, brand, model, price, connection_type, image } = req.body
+  const { name, brand, model, price, connection_type } = req.body
 
   Cameras.findByIdAndUpdate(
     id,
@@ -44,7 +47,7 @@ export const editCamera = (req: Request, res: Response) => {
       model,
       price,
       connection_type,
-      image
+      image: req.file?.path
     },
     { new: true },
     (error, camera) => {
@@ -62,13 +65,14 @@ export const editCamera = (req: Request, res: Response) => {
 export const deleteCamera = (req: Request, res: Response) => {
   const { id } = req.params
 
-  Cameras.findByIdAndDelete(id, (error: NativeError, camera) => {
+  Cameras.findByIdAndDelete(id, (error: NativeError, camera: Camera) => {
     if (error) {
       res.status(500).json({ error })
       console.error(error)
       return
     }
 
+    fs.unlinkSync(resolve(camera.image))
     res.status(200).json(camera)
   })
 }
