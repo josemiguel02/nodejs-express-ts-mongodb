@@ -47,7 +47,7 @@ The application performs CRUD-type queries and then returns them to the REST API
 3. Install NPM packages
 
 ```sh
-  npm install
+  yarn install
 ```
 
 4. Add the following environment variables to your .env file
@@ -63,13 +63,13 @@ The application performs CRUD-type queries and then returns them to the REST API
 Run the project in development
 
 ```
-  npm run dev
+  yarn dev
 ```
 
 Build the project
 
 ```
-  npm run build
+  yarn build
 ```
 
 ## API Reference
